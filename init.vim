@@ -76,7 +76,7 @@ nnoremap <leader>s :w<CR>
 nnoremap <leader><CR> :so ~/.config/nvim/init.vim<CR>
 
 " Commentary
-nnoremap <leader>/ :commentary<cr>
+nnoremap <leader>/ :Commentary<cr>
 
 " Indent all lines
 nnoremap <leader>ia gg=g
