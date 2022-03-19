@@ -1,5 +1,5 @@
 " Credits go to the_primeagen for the delicous cocunut oil initial setup!
-" Also credits to all the giga vim chads on the interwebs who made all the
+" Also credits to all the vim giga chads on the interwebs who made all the
 " tutorials and documentation that helped me make this vim setup possible
 
 " Sets
@@ -51,7 +51,7 @@ Plug 'gruvbox-community/gruvbox'
 Plug 'norcalli/nvim-colorizer.lua'
 " Commentary
 Plug 'tpope/vim-commentary'
-" Better visuals
+" Better tab
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 " Syntax highlight
@@ -59,27 +59,55 @@ Plug 'yuezk/vim-js'
 Plug 'maxmellon/vim-jsx-pretty'
 " Vim inside browser
 Plug 'glacambre/firenvim', { 'do': { _ -> firenvim#install(0) } }
+" Git integration
+Plug 'tpope/vim-fugitive'
 call plug#end()
 
 lua require'colorizer'.setup()
 colorscheme gruvbox
 autocmd FileType scss setl iskeyword+=@-@
 
-
 " Remaps
 let mapleader = " "
-" Telescope Grep For
-nnoremap <leader>ps :lua require('telescope.builtin').grep_string({ search = vim.fn.input("Grep For > ")})<CR>
+" Save file
+nnoremap <leader>s :w<CR>
+
+" Source init.vim
+nnoremap <leader><CR> :so ~/.config/nvim/init.vim<CR>
 
 " Commentary
 nnoremap <leader>/ :commentary<cr>
 
-" Save file
-nnoremap <leader>s :w<CR>
+" Indent all lines
+nnoremap <leader>ia gg=g
+
+" Yank to the end of the line
+nnoremap Y y$
+
+" Copy to clipboard
+nnoremap <leader>p "+p
+vnoremap <leader>p "+p
+nnoremap <leader>P "+P
+vnoremap <leader>P "+P
+nnoremap <leader>y "+y
+vnoremap <leader>y "+y
+nnoremap <leader>Y "+y$
+
+" Undo break points
+inoremap , ,<c-g>u
+inoremap . .<c-g>u
+inoremap ! !<c-g>u
+inoremap ? ?<c-g>u
+
+" Jumplist mutations
+nnoremap <expr> k (v:count > 5 ? "m'" . v:count : "") . 'k'
+nnoremap <expr> j (v:count > 5 ? "m'" . v:count : "") . 'j'
 
 " Move line up and down
 vnoremap K :m '<-2<CR>gv=gv
 vnoremap J :m '>+1<CR>gv=gv
+inoremap <C-j> <esc>:m .+1<CR>==
+inoremap <C-k> <esc>:m .-2<CR>==
 
 " Move through windows
 nnoremap <leader>h :wincmd h<CR>
@@ -94,21 +122,6 @@ nnoremap <leader>- :vertical resize -5<CR>
 " New window
 nnoremap <leader>nw :wincmd v<bar> :vertical resize 45<cr>
 
-" Source init.vim
-nnoremap <leader><CR> :so ~/.config/nvim/init.vim<CR>
-
-" Copy to clipboard
-nnoremap <leader>p "+p
-vnoremap <leader>p "+p
-nnoremap <leader>P "+P
-vnoremap <leader>P "+P
-nnoremap <leader>y "+y
-vnoremap <leader>y "+y
-nnoremap <leader>Y "+y$
-
-" Indent all lines
-nnoremap <leader>ia gg=g
-
 " Undotree
 nnoremap <leader>u :UndotreeToggle<CR>
 
@@ -121,7 +134,16 @@ nnoremap <F3> :NERDTreeToggle<CR>
 " Vim-closetag
 nnoremap <leader>ct :CloseTagToggleBuffer<CR>
 
+" Telescope Grep For
+nnoremap <leader>ps :lua require('telescope.builtin').grep_string({ search = vim.fn.input("Grep For > ")})<CR>
 
+" Git integration
+" Git Status
+nmap <leader>gs :G<CR>
+" Git difference side rigth
+nmap <leader>gl :diffget //3<CR>
+" Git difference side left
+nmap <leader>gh :diffget //2<CR>
 
 " Remove white space on save
 fun! TrimWhiteSpace()
