@@ -1,5 +1,5 @@
 " Credits go to the_primeagen for the delicous cocunut oil initial setup!
-" Also credits to all the vim giga chads on the interwebs who made all the
+" Also credits to all the giga vim chads on the interwebs who made all the
 " tutorials and documentation that helped me make this vim setup possible
 
 " Sets
@@ -72,11 +72,18 @@ let mapleader = " "
 " Save file
 nnoremap <leader>s :w<CR>
 
+" Compile with sass
+nnoremap <leader>rs :!sass % %:r.css<CR>
+
+" Run with node
+nnoremap <leader>rn :!node %<CR>
+
 " Source init.vim
 nnoremap <leader><CR> :so ~/.config/nvim/init.vim<CR>
 
 " Commentary
 nnoremap <leader>/ :Commentary<cr>
+vnoremap <leader>/ :Commentary<cr>
 
 " Indent all lines
 nnoremap <leader>ia gg=g
