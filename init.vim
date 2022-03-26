@@ -61,6 +61,10 @@ Plug 'maxmellon/vim-jsx-pretty'
 Plug 'glacambre/firenvim', { 'do': { _ -> firenvim#install(0) } }
 " Git integration
 Plug 'tpope/vim-fugitive'
+" Emmet
+Plug 'mattn/emmet-vim'
+" Indent Line
+Plug 'Yggdroot/indentLine'
 call plug#end()
 
 lua require'colorizer'.setup()
@@ -69,6 +73,18 @@ autocmd FileType scss setl iskeyword+=@-@
 
 " Remaps
 let mapleader = " "
+
+" Fold
+" Enable foldable
+nnoremap <leader>sfe :set foldenable <bar> set foldmethod=indent<CR>
+" Disable foldable
+nnoremap <leader>sfd :set nofoldenable<CR>
+" Close all folds
+nnoremap <leader>fc zM
+" Open all folds
+nnoremap <leader>fo zR
+" Use za to open/close fold
+
 " Save file
 nnoremap <leader>s :w<CR>
 
@@ -164,7 +180,12 @@ augroup CallTrim
   autocmd BufWritePre * :call TrimWhiteSpace()
 augroup END
 
-
+" Emmet Vim config
+" Only enable normal mode functions.
+" let g:user_emmet_mode='n'
+" Enable just for html/css
+" let g:user_emmet_install_global = 0
+" autocmd FileType html,css EmmetInstall
 
 " COC Config
 " Use tab to autocomplete
