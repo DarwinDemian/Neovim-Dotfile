@@ -74,6 +74,12 @@ autocmd FileType scss setl iskeyword+=@-@
 " Remaps
 let mapleader = " "
 
+" Set filetype to Java
+nnoremap <leader>fj :set filetype=java<CR>
+
+" Run Java file
+nnoremap <leader>rj :!java %<CR>
+
 " Fold
 " Enable foldable
 nnoremap <leader>sfe :set foldenable <bar> set foldmethod=indent<CR>
