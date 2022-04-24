@@ -1,6 +1,3 @@
-" Credits go to the_primeagen for the delicous cocunut oil initial setup!
-" Also credits to all the giga vim chads on the interwebs who made all the
-" tutorials and documentation that helped me make this vim setup possible
 
 " Sets
 set tabstop=2 softtabstop=2
@@ -65,6 +62,7 @@ Plug 'tpope/vim-fugitive'
 Plug 'mattn/emmet-vim'
 " Indent Line
 Plug 'Yggdroot/indentLine'
+Plug 'andreshazard/vim-freemarker'
 call plug#end()
 
 lua require'colorizer'.setup()
@@ -73,6 +71,13 @@ autocmd FileType scss setl iskeyword+=@-@
 
 " Remaps
 let mapleader = " "
+
+" Tab shortcuts
+" New Tab
+nnoremap <leader>tn :tabnew<CR>
+
+" Move Tab
+nnoremap <leader>tm :tabmove
 
 " Set filetype to Java
 nnoremap <leader>fj :set filetype=java<CR>
@@ -121,6 +126,9 @@ vnoremap <leader>P "+P
 nnoremap <leader>y "+y
 vnoremap <leader>y "+y
 nnoremap <leader>Y "+y$
+
+" Select all
+nnoremap <leader>sa V gg G
 
 " Undo break points
 inoremap , ,<c-g>u
@@ -290,3 +298,25 @@ let g:closetag_shortcut = '>'
 
 let g:closetag_close_shortcut = '<leader>>'
 " VIM-CLOSE-TAGS END
+
+lua << EOF
+require('telescope').setup{
+	defaults = {
+		path_display={"smart"}
+	}
+}
+EOF
+
+" COC Java auto-import
+autocmd BufWritePre *.go :silent call CocAction('runCommand', 'editor.action.organizeImport')
+command! -nargs=0 OR :silent call CocAction('runCommand', 'editor.action.organizeImport')
+
+" Find files using Telescope command-line sugar.
+nnoremap <leader>ff <cmd>Telescope find_files <cr>
+nnoremap <leader>ffh <cmd>Telescope find_files hidden=true<cr>
+nnoremap <leader>fg <cmd>Telescope live_grep<cr>
+nnoremap <leader>fb <cmd>Telescope buffers<cr>
+nnoremap <leader>fh <cmd>Telescope help_tags<cr>
+
+let g:NERDTreeChDirMode = 2
+
