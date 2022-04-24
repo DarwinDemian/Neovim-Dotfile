@@ -1,3 +1,6 @@
+" Credits go to the_primeagen for the delicous cocunut oil initial setup!
+" Also credits to all the giga vim chads on the interwebs who made all the
+" tutorials and documentation that helped me make this vim setup possible
 
 " Sets
 set tabstop=2 softtabstop=2
@@ -63,6 +66,7 @@ Plug 'mattn/emmet-vim'
 " Indent Line
 Plug 'Yggdroot/indentLine'
 Plug 'andreshazard/vim-freemarker'
+Plug 'rustushki/JavaImp.vim'
 call plug#end()
 
 lua require'colorizer'.setup()
@@ -128,7 +132,7 @@ vnoremap <leader>y "+y
 nnoremap <leader>Y "+y$
 
 " Select all
-nnoremap <leader>sa V gg G
+nnoremap <leader>sa gg V G
 
 " Undo break points
 inoremap , ,<c-g>u
