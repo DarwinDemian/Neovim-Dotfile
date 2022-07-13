@@ -26,6 +26,9 @@ set timeout
 set timeoutlen=500
 set termguicolors
 
+set nocompatible
+filetype plugin on
+syntax on
 
 " Plugins
 call plug#begin('~/.vim/plugged')
@@ -65,8 +68,11 @@ Plug 'tpope/vim-fugitive'
 Plug 'mattn/emmet-vim'
 " Indent Line
 Plug 'Yggdroot/indentLine'
+" FTL Syntax Highlight
 Plug 'andreshazard/vim-freemarker'
 Plug 'rustushki/JavaImp.vim'
+" Vim note taking
+Plug 'vimwiki/vimwiki'
 call plug#end()
 
 lua require'colorizer'.setup()
@@ -75,6 +81,9 @@ autocmd FileType scss setl iskeyword+=@-@
 
 " Remaps
 let mapleader = " "
+
+" nnoremap <leader>i A <ESC> b vey A <ESC> 2b vep ctrl + o 3j A <ESC> b vey j A <ESC> 2b vep
+
 
 " Tab shortcuts
 " New Tab
@@ -323,4 +332,22 @@ nnoremap <leader>fb <cmd>Telescope buffers<cr>
 nnoremap <leader>fh <cmd>Telescope help_tags<cr>
 
 let g:NERDTreeChDirMode = 2
+
+" VimWiki Config
+let g:vimwiki_key_mappings = {
+            \ 'table_mappings': 0,
+            \ }
+
+augroup VimwikiRemaps
+    autocmd!
+    " unmap tab in insert mode
+    autocmd Filetype vimwiki silent! iunmap <buffer> <Tab>
+    " remap table tab mappings to M-n M-p
+    autocmd Filetype vimwiki inoremap <silent><expr><buffer> <M-n> vimwiki#tbl#kbd_tab()
+    autocmd Filetype vimwiki inoremap <silent><expr><buffer> <M-p> vimwiki#tbl#kbd_shift_tab()
+    " on enter if completion is open, complete first element otherwise use
+    " default vimwiki mapping
+    autocmd Filetype vimwiki inoremap <silent><expr><buffer> <cr> pumvisible() ? coc#_select_confirm()
+                              \: "<C-]><Esc>:VimwikiReturn 1 5<CR>"
+augroup end
 
